@@ -1,0 +1,6 @@
+SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/domain_admin_dev
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=postgres
+OIDC_AUTHORIZATIONURL=https://localhost/oauth2/authorize
+OIDC_CLIENTID=local_sp
+OIDC_CLIENTSECRET=dGVzdHNw

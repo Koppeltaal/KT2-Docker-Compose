@@ -1,0 +1,7 @@
+HOST_URL=https://localhost
+ADMIN_EMAIL=admin@localhost
+JWT_ISSUER="localhost"
+CLIENT_KEY="local_sp"
+CLIENT_MAP='{"local_sp":{"auth_method":"hmac","key": "dGVzdHNw"}}'
+SCHEMES="https://privacybydesign.foundation/schememanager/pbdf"
+DEBUG=2
