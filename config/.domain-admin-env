@@ -1,6 +1,9 @@
 SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/domain_admin_dev
 SPRING_DATASOURCE_USERNAME=postgres
 SPRING_DATASOURCE_PASSWORD=postgres
-OIDC_AUTHORIZATIONURL=https://localhost/oauth2/authorize
-OIDC_CLIENTID=local_sp
-OIDC_CLIENTSECRET=dGVzdHNw
+OIDC_AUTHORIZATIONURL=http://localhost:8080/realms/kt2/protocol/openid-connect/auth
+OIDC_TOKENURL=http://keycloak:8080/realms/kt2/protocol/openid-connect/token
+OIDC_CLIENTID=domain-admin
+OIDC_CLIENTSECRET=aHwTF6wkN04iKBorPm4JQ3Wb9RbK3lXn
+
+JWK_PROVIDER_FACTORY_ISSUER_OVERRIDE={"http://localhost:8080/realms/kt2": "http://keycloak:8080/realms/kt2"}
