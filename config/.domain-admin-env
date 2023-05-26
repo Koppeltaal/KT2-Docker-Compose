@@ -7,7 +7,7 @@ OIDC_TOKENURL=http://keycloak:8080/realms/kt2/protocol/openid-connect/token
 OIDC_CLIENTID=domain-admin
 OIDC_CLIENTSECRET=aHwTF6wkN04iKBorPm4JQ3Wb9RbK3lXn
 
-FHIR_SMART_SERVICE_FHIRSERVERURL=http://fhir-server:8080/fhir/DEFAULT
+FHIR_SMART_SERVICE_FHIRSERVERURL=http://fhir-service:8080/fhir/DEFAULT
 FHIR_SMART_SERVICE_CLIENTID=domain-admin-client
 FHIR_SMART_SERVICE_DEVICEREF=Device/b9c27e2a-9e85-41cb-a591-04b5c1c8857e
 

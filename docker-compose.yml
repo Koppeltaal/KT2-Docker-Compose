@@ -25,6 +25,14 @@ services:
       - '8083:8080'
     restart: on-failure:10
 
+  fhir-service:
+    image: jorisheadease/hapi:v0.1.2
+    env_file:
+      - ./config/.fhir-service-env
+    ports:
+      - '8080:8080'
+      - '5005:5005' #maps the remote debug port, see JAVA_TOOL_OPTIONS in the properties
+
   auth-service:
     image: jorisheadease/kt2-auth-service
     env_file:
@@ -42,14 +50,6 @@ services:
     depends_on:
       - auth-service
       - fhir-service
-
-  fhir-service:
-    image: jorisheadease/hapi:v0.1.2
-    env_file:
-      - ./config/.fhir-service-env
-    ports:
-      - '8080:8080'
-      - '5005:5005'
 
 volumes:
   postgres-data:
