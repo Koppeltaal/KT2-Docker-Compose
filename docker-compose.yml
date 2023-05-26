@@ -22,8 +22,15 @@ services:
       - config/.keycloak-env
     ports:
       - '9990:9990'
-      - '8080:8080'
+      - '8083:8080'
     restart: on-failure:10
+
+  auth-service:
+    image: jorisheadease/kt2-auth-service
+    env_file:
+      - ./config/.auth-service-env
+    ports:
+      - '8082:5000'
 
   domain-admin:
     image: jorisheadease/kt2-domain-admin:latest
@@ -32,20 +39,17 @@ services:
     env_file:
       - ./config/.domain-admin-env
     restart: on-failure:10
-#
-#  auth-service:
-#    image: jorisheadease/kt2-auth-service
-#    env_file:
-#      - ./config/.auth-service-env
-#    ports:
-#      - '8083:5000'
+    depends_on:
+      - auth-service
+      - fhir-service
 
-#  fhir-service:
-#    image: jorisheadease/hapi:master-tomcat
-#    env_file:
-#      - ./config/.fhir-service-env
-#    ports:
-#      -
+  fhir-service:
+    image: jorisheadease/hapi:v0.1.2
+    env_file:
+      - ./config/.fhir-service-env
+    ports:
+      - '8080:8080'
+      - '5005:5005'
 
 volumes:
   postgres-data:

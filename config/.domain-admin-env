@@ -1,9 +1,15 @@
 SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/domain_admin_dev
 SPRING_DATASOURCE_USERNAME=postgres
 SPRING_DATASOURCE_PASSWORD=postgres
-OIDC_AUTHORIZATIONURL=http://localhost:8080/realms/kt2/protocol/openid-connect/auth
+
+OIDC_AUTHORIZATIONURL=http://localhost:8083/realms/kt2/protocol/openid-connect/auth
 OIDC_TOKENURL=http://keycloak:8080/realms/kt2/protocol/openid-connect/token
 OIDC_CLIENTID=domain-admin
 OIDC_CLIENTSECRET=aHwTF6wkN04iKBorPm4JQ3Wb9RbK3lXn
 
-JWK_PROVIDER_FACTORY_ISSUER_OVERRIDE={"http://localhost:8080/realms/kt2": "http://keycloak:8080/realms/kt2"}
+FHIR_SMART_SERVICE_FHIRSERVERURL=http://fhir-server:8080/fhir/DEFAULT
+FHIR_SMART_SERVICE_CLIENTID=domain-admin-client
+FHIR_SMART_SERVICE_DEVICEREF=Device/b9c27e2a-9e85-41cb-a591-04b5c1c8857e
+
+
+JWK_PROVIDER_FACTORY_ISSUER_OVERRIDE={"http://localhost:8083/realms/kt2": "http://keycloak:8080/realms/kt2"}
