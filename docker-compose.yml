@@ -33,13 +33,6 @@ services:
       - '8080:8080'
       - '5005:5005' #maps the remote debug port, see JAVA_TOOL_OPTIONS in the properties
 
-  auth-service:
-    image: jorisheadease/kt2-auth-service
-    env_file:
-      - ./config/.auth-service-env
-    ports:
-      - '8082:5000'
-
   domain-admin:
     image: jorisheadease/kt2-domain-admin:latest
     ports:
@@ -47,9 +40,22 @@ services:
     env_file:
       - ./config/.domain-admin-env
     restart: on-failure:10
+    healthcheck:
+      test: curl --fail http://127.0.0.1:8080/.well-known/jwks.json || exit 1
+      interval: 10s
+      retries: 30
+      start_period: 20s
+      timeout: 20s
+
+  auth-service:
+    image: jorisheadease/kt2-auth-service
+    env_file:
+      - ./config/.auth-service-env
+    ports:
+      - '8082:5000'
     depends_on:
-      - auth-service
-      - fhir-service
+      domain-admin:
+        condition: service_healthy # ensure domain-admin initialized the database
 
 volumes:
   postgres-data:

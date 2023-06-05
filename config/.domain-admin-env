@@ -13,3 +13,5 @@ FHIR_SMART_SERVICE_DEVICEREF=Device/b9c27e2a-9e85-41cb-a591-04b5c1c8857e
 
 
 JWK_PROVIDER_FACTORY_ISSUER_OVERRIDE={"http://localhost:8083/realms/kt2": "http://keycloak:8080/realms/kt2"}
+
+SMART_SERVICE_INIT_JWKS_URL=http://domain-admin:8081/.well-known/jwks.json
