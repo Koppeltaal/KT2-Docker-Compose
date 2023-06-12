@@ -1,7 +1,7 @@
 # KT2-Docker-Compose
 
-Docker compose project to spwan the required system components that make up the
-Kt2 architecture: A FHIR store, an IDP, an Authorization service and the Domain
+Docker compose project to spawn the required system components that make up the
+KT2 architecture: A FHIR store, an IDP, an Authorization service and the Domain
 service.
 
 ## Running
@@ -52,7 +52,7 @@ Once the containers are running you can access the services:
   * Domain admin service: http://localhost:8081/
   * FHIR store/service: http://localhost:8080/
   * The base URL for the FHIR store is:
-    http://localhost:8080/fhir/DEFAULT/metadata
+    http://localhost:8080/fhir/DEFAULT
   * The metadata URL for the FHIR store is:
     http://localhost:8080/fhir/DEFAULT/metadata
   * The SMART configuration can be found at:
