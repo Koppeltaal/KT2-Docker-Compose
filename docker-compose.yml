@@ -8,10 +8,16 @@ services:
     ports:
       - '5433:5432'
     volumes:
-      - postgres-data:/data/postgres
-      - ./sql/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     storage_opt:
       size: '512M'
+    healthcheck:
+      test: test -f /tmp/fixtures-loaded
+      interval: 2s
+      retries: 20
+      start_period: 5s
+      timeout: 1s
+
   keycloak:
     image: quay.io/keycloak/keycloak:21.1.1
     volumes:
@@ -24,6 +30,9 @@ services:
       - '9990:9990'
       - '8083:8080'
     restart: on-failure:10
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   fhir-service:
     image: jorisheadease/hapi:v0.1.2
@@ -31,7 +40,9 @@ services:
       - ./config/.fhir-service-env
     ports:
       - '8080:8080'
-      - '5005:5005' #maps the remote debug port, see JAVA_TOOL_OPTIONS in the properties
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   domain-admin:
     image: jorisheadease/kt2-domain-admin:latest
@@ -42,10 +53,13 @@ services:
     restart: on-failure:10
     healthcheck:
       test: curl --fail http://127.0.0.1:8080/.well-known/jwks.json || exit 1
-      interval: 10s
-      retries: 30
-      start_period: 20s
-      timeout: 20s
+      interval: 2s
+      retries: 20
+      start_period: 60s
+      timeout: 1s
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   auth-service:
     image: jorisheadease/kt2-auth-service
@@ -56,7 +70,3 @@ services:
     depends_on:
       domain-admin:
         condition: service_healthy # ensure domain-admin initialized the database
-
-volumes:
-  postgres-data:
-    driver: local
