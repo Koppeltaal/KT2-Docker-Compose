@@ -8,7 +8,6 @@ services:
     ports:
       - '5433:5432'
     volumes:
-      - postgres-data:/data/postgres
       - ./sql/create_databases.sql:/docker-entrypoint-initdb.d/create_databases.sql
     storage_opt:
       size: '512M'
@@ -56,7 +55,3 @@ services:
     depends_on:
       domain-admin:
         condition: service_healthy # ensure domain-admin initialized the database
-
-volumes:
-  postgres-data:
-    driver: local
