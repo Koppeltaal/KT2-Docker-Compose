@@ -4,6 +4,15 @@ Docker compose project to spawn the required system components that make up the
 KT2 architecture: A FHIR store, an IDP, an Authorization service and the Domain
 service.
 
+## Preparations
+
+You need to generate a key pair that is used for authorizing the SMART client.
+The public part will be inserted in the Domain admin service's databases. The
+file needs to be placed in `secrets/public.pem` in PEM format. The private part
+of the keypair is used by the SMART client implementation you are developing.
+
+[instructions here for key generation]
+
 ## Running
 
 ```shell
@@ -27,21 +36,8 @@ underlying Postgres database is restored with:
     its status is set to "active"
   * An additional KT2 client registration is available called "Test service",
     also with the "Admin" role and the status is set to "active".
-* The "Test service" client registation credentials are:
-  * client_id: `552bfe09-3ea6-4bf8-9ecc-876276934aaa`
-  * Public key (in PEM):
-    ```
-    -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAla+QxOQNCxgGa0QCvaE4
-    Fo/l42wWHLHGQN2x97iSNIR63GrfSvMPqH7qw3g2LXQUTF7pVI+3hjWbzq3qUdhC
-    nkS8vfmKh0Q6zkpr9P4jiPRCGZ+ZM6G0IqVz/AyN3hrY+cvYgArkFTLdtLLSuCjp
-    w9bRirr1qOoL2iSE5+VDInxQmihXMZf0hNT0b0GDo39jTbr90PFbA5fxpffRKg9k
-    NQaINSY0AKigjPVSFtneOY89fLCnmp6QJ63kq36MEmc7Kbz7YmJLZ3Nv+9km/PX/
-    ZC9ZljsHSFh3bRws6pLdX6BajAyr6TUHnW8eBGZem8p6dvh2Yt6CGUxUVxycKFGy
-    vwIDAQAB
-    -----END PUBLIC KEY-----
-    ```
-  * The corresponding private key can be found in `secrets/signing-key.pem`
+* The "Test service" SMART client registation client id is:
+  `552bfe09-3ea6-4bf8-9ecc-876276934aaa`
 
 ## Services
 
@@ -60,10 +56,6 @@ Once the containers are running you can access the services:
 
 ## Notes / Caveats
 
-* It is bad practice to commit secrets to GitHub. To unblock further steps we
-  choose to compromise: **DO NOT USE THE SIGNING KEYS PROVIDED HERE FOR
-  ANYTHING, BUT RUNNING A LOCAL TEST SETUP**. It is the intention to resolve
-  this situation in the near future.
 * The client registration will have "super powers" and not just a limited set
   of permissions. It is the intention to resolve that in the near future.
 * The start up time of the full setup take a relatively long time (several tens
