@@ -4,15 +4,6 @@ Docker compose project to spawn the required system components that make up the
 KT2 architecture: A FHIR store, an IDP, an Authorization service and the Domain
 service.
 
-## Preparations
-
-You need to generate a key pair that is used for authorizing the SMART client.
-The public part will be inserted in the Domain admin service's databases. The
-file needs to be placed in `secrets/public.pem` in PEM format. The private part
-of the keypair is used by the SMART client implementation you are developing.
-
-[instructions here for key generation]
-
 ## Running
 
 ```shell
@@ -43,6 +34,10 @@ underlying Postgres database is restored with:
 
 Once the containers are running you can access the services:
 
+  * Keygen: This service ensures a key pair is generated. The public/private key can be found in `./secrets`. The public 
+    key will automatically be added to the database. **NOTE**: Keep in mind, if you change the key pair, the
+    `01-update-publickey.sql` query will not be executed as the `initdb.d` is only executed when the db is not 
+    initialized yet.
   * IDP (Keycloak): http://localhost:8083/
   * Authorization service: http://localhost:8082/
   * Domain admin service: http://localhost:8081/

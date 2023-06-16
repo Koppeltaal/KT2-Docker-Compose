@@ -1,5 +1,9 @@
 name: koppeltaal_2_docker_compose
 services:
+  keygen:
+    image: jorisheadease/kt2-keygen
+    volumes:
+      - ./secrets:/secrets
   postgres:
     image: postgres:14.7-alpine
     restart: always
@@ -18,6 +22,9 @@ services:
       retries: 20
       start_period: 5s
       timeout: 1s
+    depends_on:
+      keygen:
+        condition: service_completed_successfully
 
   keycloak:
     image: quay.io/keycloak/keycloak:21.1.1
