@@ -8,11 +8,12 @@ services:
     ports:
       - '5433:5432'
     volumes:
+      - ./secrets:/secrets
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     storage_opt:
       size: '512M'
     healthcheck:
-      test: test -f /tmp/fixtures-loaded
+      test: test -f /tmp/fixtures-loaded && test -f /secrets/public.pem
       interval: 2s
       retries: 20
       start_period: 5s
