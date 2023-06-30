@@ -36,7 +36,7 @@ Once the containers are running you can access the services:
 
   * Keygen: This service ensures a key pair is generated. The public/private key can be found in `./secrets`. The public 
     key will automatically be added to the database. **NOTE**: Keep in mind, if you change the key pair, the
-    `01-update-publickey.sql` query will not be executed as the `initdb.d` is only executed when the db is not 
+    `03-update-publickey.sql` query will not be executed as the `initdb.d` is only executed when the db is not 
     initialized yet.
   * IDP (Keycloak): http://localhost:8083/
   * Authorization service: http://localhost:8082/
@@ -48,6 +48,20 @@ Once the containers are running you can access the services:
     http://localhost:8080/fhir/DEFAULT/metadata
   * The SMART configuration can be found at:
     http://localhost:8080/fhir/DEFAULT/.well-known/smart-configurations
+
+### Regenerate a clean state 
+By default, this project restores database dumps in order to start quickly and provide a deterministic state.
+However, this causes maintenance issues. When the database scheme changes, this can cause problems. As a solution, this 
+project provides the [build_and_dump](./build_and_dump/README.md) folder. **NOTE**: This script will throw away all existing data from the 
+volume! Click on the link to see the build_and_dump README for more information.
+
+#### Regenerate a Keycloak realm export
+Keycloak is always populated with a config file against an empty database. If you wish to extend the  config file, 
+execute the following command after the Keycloak state is correct.
+```bash
+docker exec kt2_keycloak /opt/keycloak/bin/kc.sh export --realm kt2 --file /opt/keycloak/data/import/keycloak-kt2-realm.json
+```
+This will overwrite the config file at `/config/keycloak-kt2-realm.json`.
 
 ## Notes / Caveats
 

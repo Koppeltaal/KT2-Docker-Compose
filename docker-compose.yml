@@ -2,10 +2,12 @@ name: koppeltaal_2_docker_compose
 services:
   keygen:
     image: jorisheadease/kt2-keygen
+    container_name: kt2_keygen
     volumes:
       - ./secrets:/secrets
   postgres:
     image: postgres:14.7-alpine
+    container_name: kt2_postgres
     restart: always
     env_file:
       - ./config/.db-env
@@ -28,6 +30,7 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:21.1.1
+    container_name: kt2_keycloak
     volumes:
       - ./config/keycloak-kt2-realm.json:/opt/keycloak/data/import/keycloak-kt2-realm.json
     command:
@@ -43,7 +46,8 @@ services:
         condition: service_healthy
 
   fhir-service:
-    image: jorisheadease/hapi:v0.1.2
+    image: jorisheadease/hapi:v6.6.0-RELEASE
+    container_name: kt2_fhir_service
     env_file:
       - ./config/.fhir-service-env
     ports:
@@ -54,6 +58,7 @@ services:
 
   domain-admin:
     image: jorisheadease/kt2-domain-admin:latest
+    container_name: kt2_domain_admin
     ports:
       - '8081:8080'
     env_file:
@@ -71,6 +76,7 @@ services:
 
   auth-service:
     image: jorisheadease/kt2-auth-service
+    container_name: kt2_auth_service
     env_file:
       - ./config/.auth-service-env
     ports:
