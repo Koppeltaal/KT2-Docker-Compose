@@ -1,10 +1,9 @@
 #!/bin/sh
-echo "Stopping all services and removing volumes"
-#  stopping both docker-compose files to make sure neither is running and the volumes are cleared
+echo "Stopping all services and removing volumes and clear the volumes."
 docker compose -f ./../docker-compose.yml down -v
 docker compose down -v
 
-echo "Starting build_and_dump docker compose (detached) - this eventually builds a fresh database"
+echo "Starting build_and_dump docker compose (detached) - this eventually builds a fresh database."
 docker compose up -d
 
 until curl --silent --fail http://localhost:8080/fhir/DEFAULT/metadata
