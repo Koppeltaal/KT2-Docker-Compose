@@ -5,7 +5,10 @@ against empty databases to create the schemes with the project's initialization
 logic instead.
 
 The main use-case is rebuilding the `/docker-entrypoint-initdb.d/01-restore-fhir-database.sql`
-file. The FHIR service can change over time.
+file as the FHIR service can change over time.
+
+In other words, the main target audience for build-and-dump tooling is the
+__maintainers__ of this KT2 Docker Compose repository and configuration.
 
 ## Important
 
