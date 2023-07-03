@@ -870,7 +870,7 @@ a6a0560e-1da6-4d0c-aa30-e37123510583	system	2023-06-12 14:31:35.310433	Admin
 
 COPY public.smart_service (id, created_by, created_on, client_id, fhir_store_device_id, jwks_endpoint, name, public_key, status, patient_idp, practitioner_idp, role_id) FROM stdin;
 3f01e9f4-998a-4a17-856d-19a9dbaccf82	system	2023-06-12 14:31:34.838394	980c7e60-0170-449d-8e88-19baaa020b63	\N	http://domain-admin:8080/.well-known/jwks.json	Smart Registration Service - Domain Admin	\N	APPROVED	\N	\N	a6a0560e-1da6-4d0c-aa30-e37123510583
-1539cd77-c079-4ee3-be9b-f0b99a8a2d43	c516f9a4-a80e-4694-b367-56f44ef4a051	2023-06-12 14:37:55.928132	552bfe09-3ea6-4bf8-9ecc-876276934aaa	e20e7535-427b-4cad-8c2f-ebcc3a0eb097	\N	testrunner service	\N	APPROVED	\N	\N	a6a0560e-1da6-4d0c-aa30-e37123510583
+1539cd77-c079-4ee3-be9b-f0b99a8a2d43	c516f9a4-a80e-4694-b367-56f44ef4a051	2023-06-12 14:37:55.928132	552bfe09-3ea6-4bf8-9ecc-876276934aaa	\N	\N	testrunner service	\N	APPROVED	\N	\N	a6a0560e-1da6-4d0c-aa30-e37123510583
 \.
 
 

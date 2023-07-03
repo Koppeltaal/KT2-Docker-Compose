@@ -83,5 +83,5 @@ services:
     ports:
       - '8082:5000'
     depends_on:
-      domain-admin:
-        condition: service_healthy # ensure domain-admin initialized the database
+      postgres:
+        condition: service_healthy
