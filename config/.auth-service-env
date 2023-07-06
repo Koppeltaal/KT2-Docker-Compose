@@ -1,1 +1,2 @@
 SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:postgres@postgres:5432/domain_admin_dev
+AUTH_SERVER_ISS=http://localhost:8082
