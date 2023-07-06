@@ -1,2 +1,2 @@
 #!/bin/sh
-touch /tmp/fixtures-loaded
+touch /data/postgres/fixtures-loaded

@@ -21,7 +21,7 @@ services:
     storage_opt:
       size: '512M'
     healthcheck:
-      test: test -f /tmp/fixtures-loaded && test -f /secrets/public.pem
+      test: pg_isready && test -f /data/postgres/fixtures-loaded && test -f /secrets/public.pem
       interval: 2s
       retries: 20
       start_period: 5s
