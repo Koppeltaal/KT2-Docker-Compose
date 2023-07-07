@@ -29,7 +29,10 @@ JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=
 
 SMART_CONFIGURATION_MANAGEMENT_ENDPOINT=http://localhost:8081
 SMART_CONFIGURATION_ISSUER=${FHIR_SERVER_SECURITY_ISSUER}
-SMART_CONFIGURATION_JWKS_URI=${SMART_CONFIGURATION_ISSUER}/.well-known/jwks.json
-SMART_CONFIGURATION_AUTHORIZATION_ENDPOINT=${SMART_CONFIGURATION_ISSUER}/oauth2/authorize
-SMART_CONFIGURATION_TOKEN_ENDPOINT=${SMART_CONFIGURATION_ISSUER}/oauth2/token
-SMART_CONFIGURATION_INTROSPECTION_ENDPOINT=${SMART_CONFIGURATION_ISSUER}/oauth2/introspect
+
+# Please note that these are the URLs to be used on the host. The internal docker network uses different URLs, and the
+# issuer will be the internal base url (http://auth-service:5000)
+SMART_CONFIGURATION_JWKS_URI=http://localhost:8082/.well-known/jwks.json
+SMART_CONFIGURATION_AUTHORIZATION_ENDPOINT=http://localhost:8082/oauth2/authorize
+SMART_CONFIGURATION_TOKEN_ENDPOINT=http://localhost:8082/oauth2/token
+SMART_CONFIGURATION_INTROSPECTION_ENDPOINT=http://localhost:8082/oauth2/introspect
